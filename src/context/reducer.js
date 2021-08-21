@@ -13,11 +13,20 @@ import {
   FETCH_SINGLE_JOB_ERROR,
   EDIT_JOB_ERROR,
   EDIT_JOB_SUCCESS,
-} from './actions'
-
+} from "./actions";
+/* 
+state = {
+  user: null,
+  isLoading: false,
+  jobs: [],
+  showAlert: false,
+  editItem: null,
+  singleJobError: false,
+  editComplete: false,
+}; */
 const reducer = (state, action) => {
   if (action.type === SET_LOADING) {
-    return { ...state, isLoading: true, showAlert: false, editComplete: false }
+    return { ...state, isLoading: true, showAlert: false, editComplete: false };
   }
 
   if (action.type === REGISTER_USER_SUCCESS) {
@@ -25,7 +34,7 @@ const reducer = (state, action) => {
       ...state,
       isLoading: false,
       user: action.payload,
-    }
+    };
   }
   if (action.type === REGISTER_USER_ERROR) {
     return {
@@ -33,11 +42,11 @@ const reducer = (state, action) => {
       isLoading: false,
       user: null,
       showAlert: true,
-    }
+    };
   }
 
   if (action.type === SET_USER) {
-    return { ...state, user: action.payload }
+    return { ...state, user: action.payload };
   }
   if (action.type === LOGOUT_USER) {
     return {
@@ -47,7 +56,7 @@ const reducer = (state, action) => {
       jobs: [],
       isEditing: false,
       editItem: null,
-    }
+    };
   }
 
   if (action.type === FETCH_JOBS_SUCCESS) {
@@ -58,24 +67,24 @@ const reducer = (state, action) => {
       singleJobError: false,
       editComplete: false,
       jobs: action.payload,
-    }
+    };
   }
   if (action.type === FETCH_JOBS_ERROR) {
-    return { ...state, isLoading: false }
+    return { ...state, isLoading: false };
   }
   if (action.type === CREATE_JOB_SUCCESS) {
     return {
       ...state,
       isLoading: false,
       jobs: [...state.jobs, action.payload],
-    }
+    };
   }
   if (action.type === CREATE_JOB_ERROR) {
     return {
       ...state,
       isLoading: false,
       showAlert: true,
-    }
+    };
   }
 
   if (action.type === DELETE_JOB_ERROR) {
@@ -83,14 +92,14 @@ const reducer = (state, action) => {
       ...state,
       isLoading: false,
       showAlert: true,
-    }
+    };
   }
 
   if (action.type === FETCH_SINGLE_JOB_SUCCESS) {
-    return { ...state, isLoading: false, editItem: action.payload }
+    return { ...state, isLoading: false, editItem: action.payload };
   }
   if (action.type === FETCH_SINGLE_JOB_ERROR) {
-    return { ...state, isLoading: false, editItem: '', singleJobError: true }
+    return { ...state, isLoading: false, editItem: "", singleJobError: true };
   }
 
   if (action.type === EDIT_JOB_SUCCESS) {
@@ -99,7 +108,7 @@ const reducer = (state, action) => {
       isLoading: false,
       editComplete: true,
       editItem: action.payload,
-    }
+    };
   }
   if (action.type === EDIT_JOB_ERROR) {
     return {
@@ -107,9 +116,9 @@ const reducer = (state, action) => {
       isLoading: false,
       editComplete: true,
       showAlert: true,
-    }
+    };
   }
-  throw new Error(`no such action : ${action}`)
-}
+  throw new Error(`no such action : ${action}`);
+};
 
-export default reducer
+export default reducer;

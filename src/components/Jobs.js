@@ -1,57 +1,58 @@
-import { useGlobalContext } from '../context/appContext'
-import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import moment from 'moment'
+import { useGlobalContext } from "../context/appContext";
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import moment from "moment";
 const Jobs = () => {
-  const { jobs, isLoading, deleteJob } = useGlobalContext()
+  const { jobs, isLoading, deleteJob } = useGlobalContext();
   if (isLoading) {
-    return <div className='loading'></div>
+    return <div className="loading"></div>;
   }
   if (jobs.length < 1) {
     return (
       <EmptyContainer>
         <h5>You have no jobs to display</h5>
       </EmptyContainer>
-    )
+    );
   }
 
   return (
     <Container>
       {jobs.map((item) => {
-        const { _id: id, company, position, status, createdAt } = item
-        let date = moment(createdAt)
-        date = date.format('MMMM Do YYYY')
+        // console.log(item);
+        const { _id: id, company, position, status, createdAt } = item;
+        let date = moment(createdAt);
+        date = date.format("MMMM Do YYYY");
         return (
-          <article key={id} className='job'>
-            <p className='job-date'>{date}</p>
+          <article key={id} className="job">
+            <p className="job-date">{date}</p>
             <h5>{position.toLowerCase()}</h5>
-            <p className='job-company'>{company}</p>
-            <div className='job-links'>
-              <Link to={`/edit/${id}`} className='job-link'>
+            <p className="job-company">{company}</p>
+            <div className="job-links">
+              <Link to={`/edit/${id}`} className="job-link">
                 edit
               </Link>
               <button
-                className='job-link job-delete'
-                type='button'
+                className="job-link job-delete"
+                type="button"
                 onClick={() => deleteJob(id)}
               >
                 delete
               </button>
-              <p className='job-status'>{status}</p>
+              <p className="job-status">{status}</p>
             </div>
           </article>
-        )
+        );
       })}
     </Container>
-  )
-}
+  );
+};
 const EmptyContainer = styled.section`
   text-align: center;
   h5 {
     text-transform: none;
   }
-`
+`;
 const Container = styled.section`
   width: 90vw;
   max-width: var(--max-width);
@@ -145,6 +146,6 @@ const Container = styled.section`
   .job-status-interview {
     color: var(--green-dark);
   }
-`
+`;
 
-export default Jobs
+export default Jobs;

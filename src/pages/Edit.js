@@ -43,7 +43,7 @@ function Update() {
       editJob(id, { company, position, status })
     }
   }
-  console.log(editItem)
+  // console.log(editItem)
   if (isLoading && !editItem) {
     return <div className='loading'></div>
   }
